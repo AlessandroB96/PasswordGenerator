@@ -32,8 +32,8 @@ function writePassword() {
 
   //while this value is not false, the loop will run indefinetely
   while (passwordLengthCorrect != true) {
-    passwordLength = window.prompt("How many characters should your password be? Choose between a minimum of 8 characters and a maximum of 128 characters");
-    
+    let input = window.prompt("How many characters should your password be? Choose between a minimum of 8 characters and a maximum of 128 characters");
+    passwordLength = parseInt(input, 10);
     if (passwordLength < 8) {
       alert("Password must be at least 8 characters");
     } else if (passwordLength > 128) {
@@ -43,11 +43,41 @@ function writePassword() {
     }
   }
 
-  let hasUpperCase = window.prompt("Would you like to include uppercase letters? Type YES or NO")
-  console.log(hasUpperCase);
+  let hasUpperCase = undefined;
+  let hasEnteredValidInput = false;
+  while (!hasEnteredValidInput) {
+    let input = window.prompt("Would you like to include uppercase letters? Type YES or NO")
 
-  let hasSpecialCharacters = window.prompt("Would you like to have special characters included? Type YES or NO");
-  console.log(hasSpecialCharacters);
+    console.log(input);
+      if (input == "YES" || input == "yes") {
+      hasEnteredValidInput = true;
+      hasUpperCase = true
+      } else if (input == "NO" || input == "no") {
+        hasEnteredValidInput = true;
+        hasUpperCase = false
+      } else {
+        alert("Please type YES or NO")
+      }
+   
+  }
+
+  let hasSpecialCharacters = false;
+  while (!hasSpecialCharacters) {
+    let input = window.prompt("Would you like to have special characters included? Type YES or NO");
+
+    if (input == "YES" || input == "yes") {
+      hasEnteredValidInput = true;
+      hasSpecialCharacters = true
+      } else if (input == "NO" || input == "no") {
+        hasEnteredValidInput = true;
+        hasSpecialCharacters = false
+      } else {
+        alert("Please type YES or NO")
+      }
+   
+  
+  }
+  console.log({hasSpecialCharacters, passwordLength, hasUpperCase});
   
   let password = generatePassword(passwordLength,hasUpperCase,hasSpecialCharacters);
 
