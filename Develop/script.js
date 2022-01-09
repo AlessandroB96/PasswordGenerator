@@ -4,10 +4,10 @@ const alphabetCapital = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N"
 
 const numbers = ["0","1","2","3","4","5","6","7","8","9"];
 
-const symbols = ["!",""];
+const symbols = ["!","*","^","%","$","#","@","&","-","+","<",">","?","/",";"];
 // Assignment code here
 
-function generatePassword(passwordLength, hasUpperCase, hasSpecialCharacters) {
+function generatePassword(passwordLength, hasUpperCase, hasSpecialCharacters, hasNumbers) {
   // using the passed in paramters generate a password
 
   let dict = [];
@@ -17,9 +17,12 @@ function generatePassword(passwordLength, hasUpperCase, hasSpecialCharacters) {
    if (hasSpecialCharacters) {
      dict.push(...symbols);
    }
+   if (hasNumbers) {
+     dict.push(...numbers);
+   }
 
   //.push adds elements to the end of an array and ... is the spread operator that spreads contents of an array 
-  dict.push(...alphabetLowercase)
+  dict.push(...alphabetLowercase);
  
   let finalPassword = "";
    for (let i=0; i < passwordLength; i++) {
@@ -38,16 +41,15 @@ const generateBtn = document.querySelector("#generate");
 
 
 function writePassword() {
-  console.log("Button was clicked")
   let passwordText = document.querySelector("#password");
 
   
   const passwordLength = fetchPasswordLength();
   const hasSpecialCharacters = fetchHasSpecialCharacters();
   const hasUppercaseLetters = fetchHasUpperCaseLetters();
+  const hasNumbers = fetchNumbers();
   
-  console.log({passwordLength, hasSpecialCharacters, hasUppercaseLetters})
-  let password = generatePassword(passwordLength,hasUppercaseLetters,hasSpecialCharacters);
+  let password = generatePassword(passwordLength,hasUppercaseLetters,hasSpecialCharacters, hasNumbers);
   
   passwordText.value = password;
 }
@@ -116,6 +118,24 @@ function fetchHasUpperCaseLetters() {
   return hasUpperCase;
 }
 
+function fetchNumbers() {
+
+  let hasNumbers;
+  while (true) {
+    let input = window.prompt("Would you like to include Numbers? Type YES or NO")
+
+    if (input == "YES" || input == "yes") {
+      hasNumbers = true;
+      break;
+    } else if (input == "NO" || input == "no") {
+      hasNumbers = false;
+      break;
+    } else {
+      alert("You can only write yes or no")
+    }
+}
+return hasNumbers;
+}
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
 
@@ -138,7 +158,7 @@ generateBtn.addEventListener("click", writePassword);
 
 
 
-
+/*
 
 let add = 0;
 
@@ -150,4 +170,4 @@ for (i=0; i <1000; i++) {
 
 console.log(add);
 
-
+*/
