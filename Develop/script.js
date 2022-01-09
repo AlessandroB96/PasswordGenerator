@@ -1,90 +1,161 @@
+const alphabetLowercase = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
+
+const alphabetCapital = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
+
+const numbers = ["0","1","2","3","4","5","6","7","8","9"];
+
+const symbols = ["!",""];
 // Assignment code here
 
-function generatePassword(passwordLength, ) {
+function generatePassword(passwordLength, hasUpperCase, hasSpecialCharacters) {
   // using the passed in paramters generate a password
 
   // logic
-
-  return generatePassword;
-
+  /*If user choose YES for capitals and symbols */
+if (hasSpecialCharacters && hasUpperCase) {
+  for (i=0; i < passwordLength; i++) {
+    Math.random(alphabetLowercase, alphabetCapital, symbols); 
+  }
 }
- const alphabetLowercase = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
+    /*If user choose YES for capitals and NO for symbols */
+ else if (!hasSpecialCharacters) {
+   for (i=0; i < passwordLength; i++) {
+      Math.random(alphabetLowercase, alphabetCapital);
+    }
+ }
+    /*If user choose NO for capitals and NO for symbols */
+ else if (!hasUppercase && !hasSpecialCharacters) {
+  for (i=0; i < passwordLength; i++) {
+    Math.random(alphabetLowercase, alphabetCapital);
+  }
+ }
+  /*If user choose No for capitals and YES for symbols */ 
+ else if (hasSpecialCharacters) {
+  for (i=0; i < passwordLength; i++) {
+    Math.random(alphabetLowercase, alphabetCapital);
+  }
+ }
 
- const alphabetCapital = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
 
- const numbers = ["0","1","2","3","4","5","6","7","8","9"];
+ return generatePassword;
 
- const symbols = ["!",""];
+ }
 
 // Get references to the #generate element
 const generateBtn = document.querySelector("#generate");
-
-// Write password to the #password input
 
 
 function writePassword() {
   console.log("Button was clicked")
   let passwordText = document.querySelector("#password");
 
-  // initialize as false and negate if actually true in while loop
-  let passwordLengthCorrect = false;    
-  let passwordLength = undefined;
+  
+  const passwordLength = fetchPasswordLength();
+  const hasSpecialCharacters = fetchHasSpecialCharacters();
+  const hasUppercaseLetters = fetchHasUpperCaseLetters();
+  
+  console.log({passwordLength, hasSpecialCharacters, hasUppercaseLetters})
+  let password = generatePassword(passwordLength,hasUppercaseLetters,hasSpecialCharacters);
+  
+  passwordText.value = password;
+}
 
-  //while this value is not false, the loop will run indefinetely
-  while (passwordLengthCorrect != true) {
+
+
+
+
+// a user can call this and it will prompt the user for special characters
+// and it will return true or false if they want special characters
+function fetchHasSpecialCharacters() {
+  let hasSpecialCharacters;
+  while (true) {
+    let input = window.prompt("Would you like to have special characters included? Type YES or NO");
+    
+    if (input == "YES" || input == "yes") {
+      hasSpecialCharacters = true;
+      break;
+    } else if (input == "NO" || input == "no") {
+      hasSpecialCharacters = false;
+      break;
+    } else {
+      alert("Please type YES or NO")
+    }
+  }
+  return hasSpecialCharacters;
+}
+
+function fetchPasswordLength() {
+  let passwordLength;
+  while (true) {
     let input = window.prompt("How many characters should your password be? Choose between a minimum of 8 characters and a maximum of 128 characters");
-    passwordLength = parseInt(input, 10);
+    
+    //logs password length as a string. We are converting it to a number
+    passwordLength = parseInt(input, 10);  
     if (passwordLength < 8) {
       alert("Password must be at least 8 characters");
+      
     } else if (passwordLength > 128) {
       alert("Password must be at most 128 characters");
     } else {
-      passwordLengthCorrect = true;
+      break;
     }
   }
+  return passwordLength
+  
+}
 
-  let hasUpperCase = undefined;
-  let hasEnteredValidInput = false;
-  while (!hasEnteredValidInput) {
+function fetchHasUpperCaseLetters() {
+  // return if the user wants upper case as a boolean
+  let hasUpperCase;
+  while (true) {
     let input = window.prompt("Would you like to include uppercase letters? Type YES or NO")
-
-    console.log(input);
-      if (input == "YES" || input == "yes") {
-      hasEnteredValidInput = true;
-      hasUpperCase = true
-      } else if (input == "NO" || input == "no") {
-        hasEnteredValidInput = true;
-        hasUpperCase = false
-      } else {
-        alert("Please type YES or NO")
-      }
-   
-  }
-
-  let hasSpecialCharacters = false;
-  while (!hasSpecialCharacters) {
-    let input = window.prompt("Would you like to have special characters included? Type YES or NO");
-
+    
     if (input == "YES" || input == "yes") {
-      hasEnteredValidInput = true;
-      hasSpecialCharacters = true
-      } else if (input == "NO" || input == "no") {
-        hasEnteredValidInput = true;
-        hasSpecialCharacters = false
-      } else {
-        alert("Please type YES or NO")
-      }
-   
-  
+      hasUpperCase = true;
+      break;
+    } else if (input == "NO" || input == "no") {
+      hasUpperCase = false;
+      break;
+    } else {
+      alert("You can only write yes or no")
+    }
+    
   }
-  console.log({hasSpecialCharacters, passwordLength, hasUpperCase});
-  
-  let password = generatePassword(passwordLength,hasUpperCase,hasSpecialCharacters);
-
-  passwordText.value = password;
-  
+  return hasUpperCase;
 }
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+let add = 0;
+
+for (i=0; i <1000; i++) {
+  if (i % 3 == 0 || i % 5 == 0) {
+    add += i;    // add = add + 1
+  } 
+};
+
+console.log(add);
+
 
