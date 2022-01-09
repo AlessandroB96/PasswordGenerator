@@ -5,39 +5,44 @@ const alphabetCapital = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N"
 const numbers = ["0","1","2","3","4","5","6","7","8","9"];
 
 const symbols = ["!","*","^","%","$","#","@","&","-","+","<",">","?","/",";"];
-// Assignment code here
 
+// Get references to the #generate id
+const generateBtn = document.querySelector("#generate");
+// Add event listener to generate button
+generateBtn.addEventListener("click", writePassword);
+
+//function for generating a password with ALL given criteria
 function generatePassword(passwordLength, hasUpperCase, hasSpecialCharacters, hasNumbers) {
   // using the passed in paramters generate a password
-
+  
+  //dictionary where we will add user criteria to the final password string
   let dict = [];
-   if (hasUpperCase) {
-     dict.push(...alphabetCapital);
-   }
-   if (hasSpecialCharacters) {
-     dict.push(...symbols);
-   }
-   if (hasNumbers) {
-     dict.push(...numbers);
-   }
-
+  if (hasUpperCase) {
+    dict.push(...alphabetCapital);
+  }
+  if (hasSpecialCharacters) {
+    dict.push(...symbols);
+  }
+  if (hasNumbers) {
+    dict.push(...numbers);
+  }
+  
   //.push adds elements to the end of an array and ... is the spread operator that spreads contents of an array 
   dict.push(...alphabetLowercase);
- 
+  
+
+  //finalPassword will fill itself with numbers and characters through a loop
   let finalPassword = "";
-   for (let i=0; i < passwordLength; i++) {
-     //variable for indexing an array
+  for (let i=0; i < passwordLength; i++) {
+    //variable for indexing an array
     let dictIndex = Math.floor(dict.length * Math.random());   
-      dict[dictIndex];
-     finalPassword += dict[dictIndex];
+    dict[dictIndex];
+    finalPassword += dict[dictIndex];
     
-   }
-   return finalPassword;
-
- }
-
-// Get references to the #generate element
-const generateBtn = document.querySelector("#generate");
+  }
+  return finalPassword;
+  
+}
 
 
 function writePassword() {
@@ -55,11 +60,8 @@ function writePassword() {
 }
 
 
+//functions for verifying user input criteria
 
-
-
-// a user can call this and it will prompt the user for special characters
-// and it will return true or false if they want special characters
 function fetchHasSpecialCharacters() {
   let hasSpecialCharacters;
   while (true) {
@@ -136,38 +138,4 @@ function fetchNumbers() {
 }
 return hasNumbers;
 }
-// Add event listener to generate button
-generateBtn.addEventListener("click", writePassword);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-
-let add = 0;
-
-for (i=0; i <1000; i++) {
-  if (i % 3 == 0 || i % 5 == 0) {
-    add += i;    // add = add + 1
-  } 
-};
-
-console.log(add);
-
-*/
