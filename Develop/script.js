@@ -10,34 +10,26 @@ const symbols = ["!",""];
 function generatePassword(passwordLength, hasUpperCase, hasSpecialCharacters) {
   // using the passed in paramters generate a password
 
-  // logic
-  /*If user choose YES for capitals and symbols */
-if (hasSpecialCharacters && hasUpperCase) {
-  for (i=0; i < passwordLength; i++) {
-    Math.random(alphabetLowercase, alphabetCapital, symbols); 
-  }
-}
-    /*If user choose YES for capitals and NO for symbols */
- else if (!hasSpecialCharacters) {
-   for (i=0; i < passwordLength; i++) {
-      Math.random(alphabetLowercase, alphabetCapital);
-    }
- }
-    /*If user choose NO for capitals and NO for symbols */
- else if (!hasUppercase && !hasSpecialCharacters) {
-  for (i=0; i < passwordLength; i++) {
-    Math.random(alphabetLowercase, alphabetCapital);
-  }
- }
-  /*If user choose No for capitals and YES for symbols */ 
- else if (hasSpecialCharacters) {
-  for (i=0; i < passwordLength; i++) {
-    Math.random(alphabetLowercase, alphabetCapital);
-  }
- }
+  let dict = [];
+   if (hasUpperCase) {
+     dict.push(...alphabetCapital);
+   }
+   if (hasSpecialCharacters) {
+     dict.push(...symbols);
+   }
 
-
- return generatePassword;
+  //.push adds elements to the end of an array and ... is the spread operator that spreads contents of an array 
+  dict.push(...alphabetLowercase)
+ 
+  let finalPassword = "";
+   for (let i=0; i < passwordLength; i++) {
+     //variable for indexing an array
+    let dictIndex = Math.floor(dict.length * Math.random());   
+      dict[dictIndex];
+     finalPassword += dict[dictIndex];
+    
+   }
+   return finalPassword;
 
  }
 
