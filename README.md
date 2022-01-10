@@ -4,7 +4,7 @@
 ### In this challenge, we are instructed to output a random password, given specific user inputs through window prompts 
 <br />
 
-<img src="./develop/passgenerator.png">
+<img src="./passgenerator.png">
 
 ### Challenge Criteria 
 
