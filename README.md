@@ -4,6 +4,8 @@
 ### In this challenge, we are instructed to output a random password, given specific user inputs through window prompts 
 <br />
 
+<img src="./develop/passgenerator.png">
+
 ### Challenge Criteria 
 
 - When the "generate password" button is clicked, a series of windows prompts should open
@@ -25,5 +27,7 @@
 ----------------------
 
 ### LINK TO WEBPAGE
+
+
 
 
